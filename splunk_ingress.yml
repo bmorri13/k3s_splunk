@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-svc
+  namespace: splunk
+spec:
+  selector:
+    app.kubernetes.io/instance: s1  # Ensure the selector matches the pod label applied by the Standalone resource
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP  # Expose service within the cluster only
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: splunk-ingress
+  namespace: splunk
+  annotations:
+    ingressClassName: "traefik"  # Ensure Traefik is used as the ingress controller
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: splunk.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: splunk-svc
+            port:
+              number: 8000

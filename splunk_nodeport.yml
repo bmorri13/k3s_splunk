@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-svc
+  namespace: splunk
+spec:
+  selector:
+    app.kubernetes.io/name: s1
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30080  # Example NodePort, accessible on this port from outside
+  type: NodePort
