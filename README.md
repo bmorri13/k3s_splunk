@@ -7,7 +7,6 @@
 - Ensure you have `kubectl` installed and configured to interact with your Kubernetes cluster.
 - Ensure you have deployed the [Splunk Operator](https://splunk.github.io/splunk-operator/) 
     - E.g. `kubectl apply -f https://github.com/splunk/splunk-operator/releases/download/2.6.0/splunk-operator-cluster.yaml --server-side  --force-conflicts`
-- Ensure the `splunk` namespace exists in your cluster.
 - Ensure you have a namespace named `splunk` created
     - E.g. Run `kubectl create ns splunk`
 
